@@ -1,0 +1,11 @@
+pytorch
+lightning
+diffusers
+pillow
+numpy
+scipy
+tqdm
+scikit-image
+opencv-python
+matplotlib
+streamlit
