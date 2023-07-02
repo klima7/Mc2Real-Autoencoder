@@ -1,8 +1,10 @@
-FROM bitnami/pytorch:2.0.1
+FROM ubuntu:latest
 
 USER root
 
-RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y
+RUN apt-get update
+RUN apt-get install python3 python-is-python3 pip  -y
+RUN apt-get install ffmpeg libsm6 libxext6 -y
 
 RUN useradd -m -u 1000 user
 

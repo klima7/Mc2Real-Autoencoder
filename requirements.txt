@@ -1,4 +1,5 @@
-# pytorch
+torch
+torchvision
 lightning
 diffusers
 pillow
