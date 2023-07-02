@@ -1,0 +1,6 @@
+**/__pycache__/**
+**/.cache/**
+**/lightning_logs/**
+conda/**
+data/**
+!data/sample_images
