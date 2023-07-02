@@ -93,15 +93,14 @@ with col_real:
     if convert:
         mc_image_pre = preprocess_image(st.session_state.mc_image)
         with st.spinner('converting'):
-            print(blend_factor, sr_steps)
             real_image = model(mc_image_pre, blend_factor=1-blend_factor, sr_inference_steps=sr_steps)
         st.image(real_image, use_column_width='always')
 
-# if model.last_segmentator_mask is not None:
-#     with st.expander('Details'):
-#         st.image(model.last_segmentator_mask, caption='Segmentator mask')
-#         st.image(model.last_raw_generator_mask, caption='Raw generator mask')
-#         st.image(model.last_filtered_generator_mask, caption='Filtered generator mask')
-#         st.image(model.last_img_without_opt, caption='Image without optimization')
-#         if model.last_img_with_opt is not None:
-#             st.image(model.last_img_with_opt, caption='Image with optimization')
+if model.last_downscaled is not None:
+    with st.expander('Details'):
+        col, _ = st.columns(2)
+        with col:
+            st.image(model.last_downscaled, caption='Downscaled image', clamp=True, use_column_width='always')
+            st.image(model.last_realized, caption='Realized image', clamp=True, use_column_width='always')
+            st.image(model.last_blend, caption='Blended image', clamp=True, use_column_width='always')
+            st.image(model.last_upscaled, caption='Upscaled image', clamp=True, use_column_width='always')
