@@ -11,7 +11,10 @@ class Mc2RealConverter:
     
     def __init__(self):
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
-        self.autoencoder = Autoencoder.load_from_checkpoint('autoencoder/checkpoints/checkpoint.ckpt')
+        self.autoencoder = Autoencoder.load_from_checkpoint(
+            'autoencoder/checkpoints/checkpoint.ckpt',
+            map_location=self.device
+        )
         self.sr = LDMSuperResolutionPipeline.from_pretrained('CompVis/ldm-super-resolution-4x-openimages').to(self.device)
 
         self.last_downscaled = None
