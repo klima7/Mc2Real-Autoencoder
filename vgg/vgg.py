@@ -30,8 +30,8 @@ class VggRealizer:
             with tf.GradientTape() as tape:
                 real_image = self.__get_random_real_image()
                 vgg_loss = self.__vgg_loss(image, real_image[None, ...])
-                l1_loss = tf.math.reduce_sum(tf.math.abs(real_image[None, ...].astype(np.float32) - mc_image.astype(np.float32)))
-                loss_value = 0.5 * vgg_loss + 0.5 * l1_loss
+                # l1_loss = tf.math.reduce_sum(tf.math.abs(real_image[None, ...].astype(np.float32) - mc_image.astype(np.float32)))
+                loss_value = vgg_loss
                 
             gradients = tape.gradient(loss_value, [image])
             optimizer.apply_gradients(zip(gradients, [image]))
@@ -43,7 +43,7 @@ class VggRealizer:
     def __get_random_real_image(self):
         path = random.choice(self.real_images_paths)
         image = cv2.imread(str(path))
-        image = cv2.resize(image, (64, 64))
+        image = cv2.resize(image, (256, 256))
         image = image / 255 - 0.5
         image = image[..., ::-1]
         return image
